@@ -162,3 +162,5 @@ xsbt-web-plugin，再设置Jetty容器绑定的端口为8081。
 
 并为sbt添加 `PluginKeys.scanDirectories in Compile := Nil` 配置（注：配置内容在 `project/BuildSettings.scala` ）。
 
+现在，你可以在sbt console中输入 `~ compile` 来享受修改代码而不需要重启的幸福了，您幸福吗？
+
