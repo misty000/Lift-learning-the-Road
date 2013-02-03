@@ -15,17 +15,24 @@ object Build extends Build {
   lazy val root = Project("root", file("."))
     .aggregate(
          learnLiftBlank,
+         appUserManager,
          yangbajingCommon, yangbajingUtil, yangbajingPersistence)
-       .settings(basicSettings: _*)
        .settings(noPublishing: _*)
 
   ///////////////////////////////////////////////////////////////
-  // projects
+  // learn projects
   ///////////////////////////////////////////////////////////////
-  lazy val learnLiftBlank = webProject("learn-lift_blank", file("learn/lift_blank"), 38081)
+  lazy val learnLiftBlank = webProject("learn_lift-blank", file("learn/lift-blank"), 48001)
     .settings(
-      name := "learn-lift_blank",
       description := "Lift 2.5官方模板")
+
+  ///////////////////////////////////////////////////////////////
+  // app projects
+  ///////////////////////////////////////////////////////////////
+  lazy val appUserManager = webProject("app_user-manager", file("app/image-share"), 48101)
+    .dependsOn(yangbajingPersistence, yangbajingUtil, yangbajingCommon)
+    .settings(
+      description := "羊八井用户管理系统")
 
   ///////////////////////////////////////////////////////////////
   // yangbajing projects

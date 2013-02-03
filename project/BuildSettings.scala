@@ -1,5 +1,6 @@
 import sbt._
 import Keys._
+import com.github.siasia.PluginKeys
 
 object BuildSettings {
   val VERSION = "0.1"
@@ -28,6 +29,7 @@ object BuildSettings {
       "-Xlint:unchecked",
       "-Xlint:deprecation"
     ),
+    PluginKeys.scanDirectories in Compile := Nil, // 使用JRebel需要
     offline               := true
   )
 
