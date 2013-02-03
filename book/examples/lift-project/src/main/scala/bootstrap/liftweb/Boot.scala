@@ -1,57 +1,49 @@
 package bootstrap.liftweb
 
-import net.liftweb._
-import util._
-import Helpers._
-
-import common._
-import http._
-import sitemap._
-import Loc._
+import net.liftweb.common.Full
+import net.liftweb.http._
+import net.liftweb.util.Helpers._
+import net.liftweb.sitemap._
 import net.liftmodules.JQueryModule
-import net.liftweb.http.js.jquery._
 
 
 /**
- * A class that's instantiated early and run.  It allows the application
- * to modify lift's environment
+ * 这就是你配置lift环境的地方，将在每次应用启动时执行
  */
 class Boot {
   def boot {
-    // where to search snippet
+    // 在哪个包下面搜索 snippet, comet, view
     LiftRules.addToPackages("code")
 
-    // Build SiteMap
+    // 构建 SiteMap
     val entries = List(
-      Menu.i("Home") / "index", // the simple way to declare a menu
+      Menu.i("Home") / "index", // 使用简单的方式来声明一个菜单
 
-      // more complex because this menu allows anything in the
-      // /static path to be visible
-      Menu(Loc("Static", Link(List("static"), true, "/static/index"), 
-	       "Static Content")))
+      // 复杂的方式，使 /static/index 静态路径是可见的
+      Menu(Loc("Static", Loc.Link(List("static"), true, "/static/index"),
+        "Static Content")))
 
-    // set the sitemap.  Note if you don't want access control for
-    // each page, just comment this line out.
-    LiftRules.setSiteMap(SiteMap(entries:_*))
+    // 设置 sitemap
+    // 注意：若你不想启用对每个页面的访问控制，请注释这行代码
+    LiftRules.setSiteMap(SiteMap(entries: _*))
 
-    //Show the spinny image when an Ajax call starts
+    // Ajax调用开始时显示的图片
     LiftRules.ajaxStart =
       Full(() => LiftRules.jsArtifacts.show("ajax-loader").cmd)
-    
-    // Make the spinny image go away when it ends
+
+    // Ajax调用结束时显示的图片
     LiftRules.ajaxEnd =
       Full(() => LiftRules.jsArtifacts.hide("ajax-loader").cmd)
 
-    // Force the request to be UTF-8
+    // 设置每个请求字符集为 UTF-8
     LiftRules.early.append(_.setCharacterEncoding("UTF-8"))
 
-    // Use HTML5 for rendering
+    // 使用 HTML5 的标签形式进行页面渲染
     LiftRules.htmlProperties.default.set((r: Req) =>
       new Html5Properties(r.userAgent))
 
-    //Init the jQuery module, see http://liftweb.net/jquery for more information.
-    LiftRules.jsArtifacts = JQueryArtifacts
-    JQueryModule.InitParam.JQuery=JQueryModule.JQuery182
+    // 初始化 jQuery 模块, 从 http://liftweb.net/jquery 了解更多信息
+    JQueryModule.InitParam.JQuery = JQueryModule.JQuery182
     JQueryModule.init()
 
   }

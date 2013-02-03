@@ -74,7 +74,7 @@ object Dependencies {
 
   val _slf4j = "org.slf4j" % "slf4j-api" % "1.7.1"
 
-  val _logback = "ch.qos.logback" % "logback-classic" % "1.0.7"
+  val _logback = "ch.qos.logback" % "logback-classic" % "1.0.9"
 
   val _rhino = "org.mozilla" % "rhino" % "1.7R4"
 
