@@ -1,21 +1,22 @@
-# 附录 A. 使用Sbt
+附录 A. 使用sbt
+======================
 
 使用Scala编程，sbt是应该学并使用的。就像Java的Maven一样。但它远比Maven强大、灵活及好用！
 
 
-# 安装sbt
+## 安装sbt
 
-下载 [sbt-launch.jar][sbt-launch.jar] 并放到 ~/bin 目录中，创建sbt12启动文件。
+下载 [sbt-launch.jar][sbt-launch.jar] 并放到 ~/bin 目录中，创建 `sbt12` 脚本。
 在sbt文件内添加如下内容：
 
     java -Xms512M -Xmx1024M -Xss1M -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=384M -Dfile.encoding=UTF-8 -jar `dirname $0`/sbt-launch.jar "$@"
 
-为新添加的脚本添加可执行权限：
+为脚本添加可执行权限：
 
     $ chmod +x ~/bin/sbt12
 
 
-Sbt奉行“约定优于配置”原则且沿用了Maven的目录结构。
+sbt奉行“约定优于配置”原则且沿用了Maven的目录结构。
 
     ├── src
     │   ├── main
@@ -28,7 +29,7 @@ Sbt奉行“约定优于配置”原则且沿用了Maven的目录结构。
     │       └── scala
 
 
-# 建立项目
+## 建立项目
 
 现在，sbt就已经装好了。接下来我们开始建立第一个sbt项目（完整的项目代码在book/examples/sbt-project）。
 首先来看看整个项目组织结构：
@@ -43,16 +44,17 @@ Sbt奉行“约定优于配置”原则且沿用了Maven的目录结构。
     
     5 directories, 2 files
 
-如上目录，在 `project/Build.scala` 中进行项目属性配置。如：`scala` 版本，依赖库，文件结构等。而 `src` 目
-录刚是标准的MAVEN式目录结构，在此就不铸更多说明。让我们来简单分析下 `project/Build.scala` 的内容：
+如上目录，在 `project/Build.scala` 中进行项目属性配置。如：`scala` 版本，依赖库，文件结构
+等。而 `src` 目录刚是标准的MAVEN式目录结构，在此就不铸更多说明。让我们来简单分析下
+ `project/Build.scala` 的内容：
 
       lazy val root = Project(
         id = "sbt-project",
         base = file("."),
         settings = Project.defaultSettings ++ basicSettings)
 
-这就是我们需要在Build.scala里面写的项目配置内容了。base 告诉sbt，这个项目在哪个目录。这里配置的是当前
-目录，就是包含project目录的目录。而 `settings` 可以对sbt项目的属性进行定制。
+这就是我们需要在Build.scala里面写的项目配置内容了。base 告诉sbt，这个项目在哪个目录。这里配置
+的是当前目录，就是包含project目录的目录。而 `settings` 可以对sbt项目的属性进行定制。
 
 sbt的更深入讲解请参考 [使用SBT构建Scala应用](https://github.com/fujohnwang/real_world_scala/blob/master/02_sbt.markdown)
 
@@ -65,7 +67,7 @@ sbt的更深入讲解请参考 [使用SBT构建Scala应用](https://github.com/f
     [success] Total time: 0 s, completed 2013-2-2 20:55:18
 
 
-# 添加Web支持（使用Jetty）
+## 添加Web支持（使用Jetty）
 
 上一节，我们已经可以使用sbt开发scala应用了。但是很多时候我们需要写Web程序，这就需要sbt支持web容器。现在
 我们为项目添加Web支持，使用Jetty做为Web容器（完整的代码在 `book/examples/web-project` ）。
@@ -89,11 +91,11 @@ xsbt-web-plugin，再设置Jetty容器绑定的端口为8081。
 
     > container:start
 
-# 建立子项目的Sbt
+## 拥有子项目的sbt项目
 
-之前介绍了单项目的sbt配置方法，但是在我们实际的开发过程中。把所有代码和模块都放在一个项目里是黑不科
-学的！我们需要把不同模块或功能的代码放到不同的项目里，sbt对此提供了完美的支持。首先让我们来看一下一
-个子项目的sbt会是什么样子：
+之前介绍了单项目的sbt配置方法，但是在我们实际的开发过程中。把所有代码和模块都放在一个项目里是很不
+科学的！这需要把不同模块或功能的代码放到不同的项目里，sbt对此提供了完美的支持。首先让我们来看一
+下一个拥有子项目的sbt项目会是什么样子：
 
     ├── core
     │   ├── common
@@ -115,8 +117,8 @@ xsbt-web-plugin，再设置Jetty容器绑定的端口为8081。
     │       │   └── test
     │       │   └── webapp
 
-在这里，可以看到整个工程也很清晰、干净的方式呈现出来。 `core` 目录下放在是所有项目共用的模块（一个模块
-为一个项目）。而在 `app` 目录下，放着的是实际需要打包为 `war` 的代码。
+在这里，可以看到整个大型项目以很清晰、干净的方式呈现出来。 `core` 目录下放在是所有项目共用的模块
+（一个模块为一个项目）。而在 `app` 目录下，放着的是实际需要打包为 `war` 的项目。
 
     lazy val root = Project("root", file("."))
       .aggregate(
@@ -147,20 +149,22 @@ xsbt-web-plugin，再设置Jetty容器绑定的端口为8081。
 
 上面是一新配置片段（注：详细配置请看 `project/Build.scala` ）。
 
-在root项目的配置中，使用aggregate方法来聚集多个子项目。而我们可以看到在appImageShare项目的配置中设置
- `file` 参数时指定了 `learn/lift_blank` 目录，这样就可以指定子项目的目录位置了。
+在root项目的配置中，使用aggregate方法来聚集多个子项目。而我们可以看到在appImageShare项目的配
+置中设置 `file` 参数时指定了 `learn/lift_blank` 目录，这样就可以指定子项目的目录位置了。
 
 
-# 添加JRebel支持
+## 添加JRebel支持
 
-可以到[这里](https://my.jrebel.com/plans/)申请免费的scala使用授权。在这里，修改 `~/bin/sbt12` 内容为：
+可以到[这里](https://my.jrebel.com/plans/)申请免费的scala使用授权。在这里，修改
+ `~/bin/sbt12` 内容为：
 
     #!/bin/sh
     java -Xms1024M -Xmx1536M -Xss1M -XX:MaxPermSize=384M -Dfile.encoding=UTF-8 \
     -XX:+CMSClassUnloadingEnabled -javaagent:/data/local/ZeroTurnaround/jrebel/jrebel.jar \
     -noverify -Drebel.lift_plugin=true -jar /data/java/lib/sbt/sbt-launch-0.12.2.jar "$@"
 
-并为sbt添加 `PluginKeys.scanDirectories in Compile := Nil` 配置（注：配置内容在 `project/BuildSettings.scala` ）。
+并为sbt添加 `PluginKeys.scanDirectories in Compile := Nil` 配置（注：配置内容在
+ `project/BuildSettings.scala` ）。
 
 现在，你可以在sbt console中输入 `~ compile` 来享受修改代码而不需要重启的幸福了，您幸福吗？
 
