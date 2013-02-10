@@ -1,0 +1,4 @@
+SCRIPT_DIR=`dirname $0`
+#java -Drun.mode=production  -Xms512M -Xmx768M -Xss1M -XX:MaxPermSize=256M -Dfile.encoding=UTF-8 -XX:+CMSClassUnloadingEnabled -jar "$SCRIPT_DIR/project/sbt-launch-0.12.2.jar" $@
+#java -Dfile.encoding=UTF-8 -XX:+CMSClassUnloadingEnabled -jar "$SCRIPT_DIR/project/sbt-launch-0.12.2.jar" $@
+java -Xms1024M -Xmx1536M -Xss1M -XX:MaxPermSize=384M -Dfile.encoding=UTF-8 -XX:+CMSClassUnloadingEnabled -noverify -javaagent:/data/local/ZeroTurnaround/jrebel/jrebel.jar -Drebel.lift_plugin=true -jar /data/java/lib/sbt/sbt-launch-0.12.1.jar "$@"
