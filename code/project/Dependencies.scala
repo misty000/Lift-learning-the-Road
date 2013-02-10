@@ -59,6 +59,8 @@ object Dependencies {
  
   val _jacksonScalaModule = "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.1.3"
 
+  val _markwrap = "org.clapper" %% "markwrap" % "1.0.0"
+
   val _jetty = {
     val jettyVersion = "8.1.8.v20121106"
     "org.eclipse.jetty" % "jetty-webapp" % jettyVersion
