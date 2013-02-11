@@ -21,6 +21,7 @@ object Dependencies {
   def container(deps: Seq[ModuleID]): Seq[ModuleID] = deps map (_ % "container")
 
   val liftVersion = "2.5-M4"
+  //val liftVersion = "2.5-SNAPSHOT"
 
   val _liftwebCommon = "net.liftweb" %% "lift-webkit" % liftVersion
 
@@ -28,6 +29,10 @@ object Dependencies {
       "net.liftmodules" %% "lift-jquery-module" % (liftVersion + "-2.1"),
       "net.liftmodules" %% "textile" % (liftVersion + "-1.3"),
       "net.liftweb" %% "lift-webkit" % liftVersion)
+  //val _liftweb = Seq(
+    //  "net.liftmodules" %% "lift-jquery-module" % (liftVersion + "-2.1-SNAPSHOT"),
+    //  "net.liftmodules" %% "textile" % (liftVersion + "-1.3-SNAPSHOT"),
+    //  "net.liftweb" %% "lift-webkit" % liftVersion)
 
   val akkaVersion = "2.1.0"
 

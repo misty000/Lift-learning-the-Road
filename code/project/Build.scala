@@ -29,7 +29,7 @@ object Build extends Build {
   ///////////////////////////////////////////////////////////////
   // app projects
   ///////////////////////////////////////////////////////////////
-  lazy val appUserManager = webProject("app_user-manager", file("app/image-share"), 48101)
+  lazy val appUserManager = webProject("app_user-manager", file("app/user-manager"), 48101)
     .dependsOn(yangbajingPersistence, yangbajingUtil, yangbajingCommon)
     .settings(
       description := "羊八井用户管理系统",
