@@ -42,14 +42,19 @@ object Dependencies {
 
   val scalatestVersion = "1.9.1"
 
-  val _scalatest = "org.scalatest" %% "scalatest" % scalatestVersion
-//    "org.scalamock" %% "scalamock-scalatest-support" % "2.4")
+  val _scalatest = Seq(
+      "org.scalatest" %% "scalatest" % scalatestVersion,
+      "org.scalamock" %% "scalamock-scalatest-support" % "3.0")
 
   val _scalaIo = Seq(
     "com.github.scala-incubator.io" %% "scala-io-core" % "0.4.1",
     "com.github.scala-incubator.io" %% "scala-io-file" % "0.4.1")
 
   val _squeryl = "org.squeryl" %% "squeryl" % "0.9.5-6"
+
+  val _slick = Seq(
+    "com.typesafe.slick" %% "slick" % "1.0.0",
+    "com.typesafe.slick" %% "slick-extensions" % "1.0.0")
 
   val salatVersion = "1.9.2-SNAPSHOT"
   val _salat = Seq(
@@ -66,10 +71,14 @@ object Dependencies {
 
   val _markwrap = "org.clapper" %% "markwrap" % "1.0.0"
 
-  val _jetty = {
-    val jettyVersion = "8.1.8.v20121106"
-    "org.eclipse.jetty" % "jetty-webapp" % jettyVersion
-  }
+  val _scalikejdbc = "com.github.seratch" %% "scalikejdbc" % "[1.4,)"
+
+  val _sqltyped = "fi.reaktor" %% "sqltyped" % "0.1.1"
+
+  //val jettyVersion = "8.1.9.v20130131"
+  val jettyVersion = "9.0.0.RC0"
+
+  val _jetty = "org.eclipse.jetty" % "jetty-webapp" % jettyVersion
 
   val _servlet30 = "org.eclipse.jetty.orbit" % "javax.servlet" % "3.0.0.v201112011016" artifacts Artifact("javax.servlet", "jar", "jar")
 
@@ -79,7 +88,7 @@ object Dependencies {
 
   val _ehcache = "net.sf.ehcache" % "ehcache-core" % "2.6.2"
 
-  val _slf4j = "org.slf4j" % "slf4j-api" % "1.7.1"
+  val _slf4j = "org.slf4j" % "slf4j-api" % "1.7.2"
 
   val _logback = "ch.qos.logback" % "logback-classic" % "1.0.9"
 

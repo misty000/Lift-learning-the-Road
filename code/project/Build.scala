@@ -34,7 +34,8 @@ object Build extends Build {
     .settings(
       description := "羊八井用户管理系统",
       libraryDependencies ++= (
-        compile(_markwrap)))
+        compile(_markwrap) ++
+        compile(_slick)))
 
   ///////////////////////////////////////////////////////////////
   // yangbajing projects
@@ -93,8 +94,9 @@ object Build extends Build {
       .settings(basicSettings: _*)
       .settings(
         resolvers ++= Seq(
-          "release" at "http://mvn-adamgent.googlecode.com/svn/maven/release",
-          "snapshots" at "http://oss.sonatype.org/content/repositories/snapshots",
+          "Typesafe Releases" at "http://repo.typesafe.com/typesafe/maven-releases/",
+          "release" at "http://mvn-adamgent.googlecode.com/svn/maven/release/",
+          "snapshots" at "http://oss.sonatype.org/content/repositories/snapshots/",
           "releases"  at "http://oss.sonatype.org/content/repositories/releases",
           "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/",
           "Typesafe Snapshots" at "http://repo.typesafe.com/typesafe/snapshots/"),
