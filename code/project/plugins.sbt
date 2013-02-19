@@ -1,5 +1,7 @@
 resolvers += Classpaths.typesafeResolver
 
+resolvers += "sbt-idea-repo" at "http://mpeltonen.github.com/maven/"
+
 // Jetty 支持
 libraryDependencies += "com.github.siasia" %% "xsbt-web-plugin" % "0.12.0-0.2.11.1"
 
